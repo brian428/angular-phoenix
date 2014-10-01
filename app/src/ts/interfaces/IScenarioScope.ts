@@ -1,6 +1,7 @@
-/// <reference path="" />
+/// <reference path='../tsd.d.ts' />
 
 module app {
+
 	export interface IScenarioScope extends ng.IScope {
         vm: ScenarioController;
         scenario: Scenario;
@@ -12,4 +13,5 @@ module app {
         affectedItems: AffectedItem[];
 
 	}
+
 }

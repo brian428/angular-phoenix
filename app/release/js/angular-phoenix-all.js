@@ -6,7 +6,7 @@
 /// <reference path='../ts_definitions/libs/ng-grid/ng-grid.d.ts' />
 
 
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 var app;
 (function (app) {
     var AppController = (function () {
@@ -105,7 +105,7 @@ var app;
 })(app || (app = {}));
 
 
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 var app;
 (function (app) {
     var ScenarioController = (function () {
@@ -132,7 +132,6 @@ var app;
 })(app || (app = {}));
 
 
-/// <reference path='../_all.ts' />
 var app;
 (function (app) {
     var ScenarioService = (function () {
@@ -253,13 +252,13 @@ var app;
 })(app || (app = {}));
 
 
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 
 
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 
 
-/// <reference path="" />
+/// <reference path='../tsd.d.ts' />
 
 
 var app;
@@ -284,7 +283,6 @@ var app;
 })(app || (app = {}));
 
 
-/// <reference path="" />
 var app;
 (function (app) {
     var InitialDataMap = (function () {

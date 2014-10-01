@@ -1,4 +1,4 @@
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 
 module app {
 	export interface IAppScope extends ng.IScope {

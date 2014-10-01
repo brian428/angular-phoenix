@@ -1,5 +1,3 @@
-/// <reference path='../_all.ts' />
-
 module app {
 
 	export class ScenarioService {

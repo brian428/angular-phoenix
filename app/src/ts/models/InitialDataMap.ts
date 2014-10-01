@@ -1,5 +1,3 @@
-/// <reference path="" />
-
 module app {
 
     export class InitialDataMap {
