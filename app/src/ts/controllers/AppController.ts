@@ -7,6 +7,10 @@ module app {
         private scope:IAppScope;
         private scenarioService:ScenarioService;
 
+        scenarios: Scenario[];
+        tabs: Array<Scenario>;
+        scenarioReferenceData: ScenarioReferenceData;
+
         public static $inject = [
             '$scope',
             'scenarioService',
@@ -15,8 +19,7 @@ module app {
 
         constructor( $scope:IAppScope, scenarioService:ScenarioService, $location:ng.ILocationService ) {
             this.scope = $scope;
-            this.scope.vm = this;
-            this.scope.tabs = [];
+            this.tabs = [];
             this.scenarioService = scenarioService;
             this.loadInitialData();
         }
@@ -25,17 +28,14 @@ module app {
             var me = this;
             this.scenarioService.loadInitialData().then(
                 ( data:InitialDataMap ) => {
-                    me.scope.scenarios = data.scenarios;
-                    me.scope.affectedItems = data.affectedItems;
-                    me.scope.probabilities = data.probabilities;
-                    me.scope.revenueImpacts = data.revenueImpacts;
-                    me.scope.effectivenessRatings = data.effectivenessRatings;
+                    me.scenarios = data.scenarios;
+                    me.scenarioReferenceData = data.scenarioReferenceData;
                 }
             );
         }
 
         removeTab( index:number ) {
-            this.scope.tabs.splice( index, 1 );
+            this.tabs.splice( index, 1 );
         }
 
         scenarioDetail( scenario:Scenario ) {
@@ -44,7 +44,7 @@ module app {
                 scenario: scenario,
                 active: true
             };
-            this.scope.tabs.push( value );
+            this.tabs.push( value );
         }
 
         newScenario() {
@@ -54,19 +54,20 @@ module app {
                 active: true
             };
             value.scenario.name = "New Scenario"
-            this.scope.tabs.push( value );
+            this.tabs.push( value );
         }
 
         addTestScenario() {
-            var testScenario:Scenario = new Scenario();
+            var refData: ScenarioReferenceData = this.scenarioReferenceData;
+            var testScenario: Scenario = new Scenario();
             testScenario.id = this.scope.scenarios.length + 1;
             testScenario.name = "Test Scenario " + testScenario.id;
             testScenario.description = "Test scenario " + testScenario.id + " description.";
             testScenario.dateUpdated = new Date();
-            testScenario.probability = this.scope.probabilities[ this.getRandomInt( 0, this.scope.probabilities.length-1 ) ];
+            testScenario.probability = refData.probabilities[ this.getRandomInt( 0, refData.probabilities.length-1 ) ];
             testScenario.impactCost = this.getRandomInt( 100, 1000 );
             testScenario.impactLength = this.getRandomInt( 5, 20 );
-            testScenario.planEffectiveness = this.scope.effectivenessRatings[ this.getRandomInt( 0, this.scope.effectivenessRatings.length-1 ) ];
+            testScenario.planEffectiveness = refData.effectivenessRatings[ this.getRandomInt( 0, refData.effectivenessRatings.length-1 ) ];
             testScenario.totalImpact = this.getRandomInt( 500, 10000 );
 
             var item:ScenarioItem = new ScenarioItem();
@@ -74,12 +75,12 @@ module app {
             item.itemDescription = "Scenario Item " + item.id;
             item.cost = this.getRandomInt( 100, 500 );
             item.timeToRecover = this.getRandomInt( 5, 20 );
-            item.impactSeverity = this.scope.revenueImpacts[ this.getRandomInt( 0, this.scope.revenueImpacts.length-1 ) ];
-            item.affectedItem = this.scope.affectedItems[ this.getRandomInt( 0, this.scope.affectedItems.length-1 ) ];
+            item.impactSeverity = refData.revenueImpacts[ this.getRandomInt( 0, refData.revenueImpacts.length-1 ) ];
+            item.affectedItem = refData.affectedItems[ this.getRandomInt( 0, refData.affectedItems.length-1 ) ];
 
             testScenario.scenarioItems.push( item );
-            this.scope.scenarios.push( testScenario )
-            this.scenarioService.saveScenarios( this.scope.scenarios );
+            this.scenarios.push( testScenario )
+            this.scenarioService.saveScenarios( this.scenarios );
         }
 
         getRandomInt( min, max ):number {

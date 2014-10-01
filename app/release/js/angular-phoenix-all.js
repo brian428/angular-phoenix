@@ -12,24 +12,20 @@ var app;
     var AppController = (function () {
         function AppController($scope, scenarioService, $location) {
             this.scope = $scope;
-            this.scope.vm = this;
-            this.scope.tabs = [];
+            this.tabs = [];
             this.scenarioService = scenarioService;
             this.loadInitialData();
         }
         AppController.prototype.loadInitialData = function () {
             var me = this;
             this.scenarioService.loadInitialData().then(function (data) {
-                me.scope.scenarios = data.scenarios;
-                me.scope.affectedItems = data.affectedItems;
-                me.scope.probabilities = data.probabilities;
-                me.scope.revenueImpacts = data.revenueImpacts;
-                me.scope.effectivenessRatings = data.effectivenessRatings;
+                me.scenarios = data.scenarios;
+                me.scenarioReferenceData = data.scenarioReferenceData;
             });
         };
 
         AppController.prototype.removeTab = function (index) {
-            this.scope.tabs.splice(index, 1);
+            this.tabs.splice(index, 1);
         };
 
         AppController.prototype.scenarioDetail = function (scenario) {
@@ -38,7 +34,7 @@ var app;
                 scenario: scenario,
                 active: true
             };
-            this.scope.tabs.push(value);
+            this.tabs.push(value);
         };
 
         AppController.prototype.newScenario = function () {
@@ -48,19 +44,20 @@ var app;
                 active: true
             };
             value.scenario.name = "New Scenario";
-            this.scope.tabs.push(value);
+            this.tabs.push(value);
         };
 
         AppController.prototype.addTestScenario = function () {
+            var refData = this.scenarioReferenceData;
             var testScenario = new app.Scenario();
             testScenario.id = this.scope.scenarios.length + 1;
             testScenario.name = "Test Scenario " + testScenario.id;
             testScenario.description = "Test scenario " + testScenario.id + " description.";
             testScenario.dateUpdated = new Date();
-            testScenario.probability = this.scope.probabilities[this.getRandomInt(0, this.scope.probabilities.length - 1)];
+            testScenario.probability = refData.probabilities[this.getRandomInt(0, refData.probabilities.length - 1)];
             testScenario.impactCost = this.getRandomInt(100, 1000);
             testScenario.impactLength = this.getRandomInt(5, 20);
-            testScenario.planEffectiveness = this.scope.effectivenessRatings[this.getRandomInt(0, this.scope.effectivenessRatings.length - 1)];
+            testScenario.planEffectiveness = refData.effectivenessRatings[this.getRandomInt(0, refData.effectivenessRatings.length - 1)];
             testScenario.totalImpact = this.getRandomInt(500, 10000);
 
             var item = new app.ScenarioItem();
@@ -68,12 +65,12 @@ var app;
             item.itemDescription = "Scenario Item " + item.id;
             item.cost = this.getRandomInt(100, 500);
             item.timeToRecover = this.getRandomInt(5, 20);
-            item.impactSeverity = this.scope.revenueImpacts[this.getRandomInt(0, this.scope.revenueImpacts.length - 1)];
-            item.affectedItem = this.scope.affectedItems[this.getRandomInt(0, this.scope.affectedItems.length - 1)];
+            item.impactSeverity = refData.revenueImpacts[this.getRandomInt(0, refData.revenueImpacts.length - 1)];
+            item.affectedItem = refData.affectedItems[this.getRandomInt(0, refData.affectedItems.length - 1)];
 
             testScenario.scenarioItems.push(item);
-            this.scope.scenarios.push(testScenario);
-            this.scenarioService.saveScenarios(this.scope.scenarios);
+            this.scenarios.push(testScenario);
+            this.scenarioService.saveScenarios(this.scenarios);
         };
 
         AppController.prototype.getRandomInt = function (min, max) {
@@ -112,15 +109,15 @@ var app;
         function ScenarioController($scope, scenarioService) {
             this.$scope = $scope;
             this.scope = $scope;
-            this.scope.vm = this;
             this.scenarioService = scenarioService;
+            this.scenarioReferenceData = scenarioService.scenarioReferenceData;
         }
         ScenarioController.prototype.saveScenario = function () {
-            this.scope.isEdit = false;
+            this.isEdit = false;
         };
 
         ScenarioController.prototype.editScenario = function () {
-            this.scope.isEdit = true;
+            this.isEdit = true;
         };
         ScenarioController.$inject = [
             '$scope',
@@ -199,8 +196,9 @@ var app;
 
         ScenarioService.prototype.loadInitialData = function () {
             var deferred = this.promiseService.defer();
-            var _this = this;
+            var me = this;
             var finalResult = new app.InitialDataMap();
+            me.scenarioReferenceData = new app.ScenarioReferenceData();
 
             this.promiseService.all([
                 this.loadProbabilities(),
@@ -209,11 +207,12 @@ var app;
                 this.loadEffectivenessRatings(),
                 this.loadScenarios()
             ]).then(function (result) {
-                finalResult.probabilities = result[0];
-                finalResult.revenueImpacts = result[1];
-                finalResult.affectedItems = result[2];
-                finalResult.effectivenessRatings = result[3];
+                me.scenarioReferenceData.probabilities = result[0];
+                me.scenarioReferenceData.revenueImpacts = result[1];
+                me.scenarioReferenceData.affectedItems = result[2];
+                me.scenarioReferenceData.effectivenessRatings = result[3];
                 finalResult.scenarios = result[4];
+                finalResult.scenarioReferenceData = me.scenarioReferenceData;
                 deferred.resolve(finalResult);
             });
 
@@ -368,6 +367,17 @@ var main;
     })();
     main.MainController = MainController;
 })(main || (main = {}));
+
+
+var app;
+(function (app) {
+    var ScenarioReferenceData = (function () {
+        function ScenarioReferenceData() {
+        }
+        return ScenarioReferenceData;
+    })();
+    app.ScenarioReferenceData = ScenarioReferenceData;
+})(app || (app = {}));
 
 
 

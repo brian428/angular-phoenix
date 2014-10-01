@@ -23,7 +23,7 @@
     <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-<div class="container" ng-controller="AppController">
+<div class="container" ng-controller="AppController as appController">
     <div class="row clearfix">
         <div class="col-md-12 column">
 
@@ -35,14 +35,14 @@
                     <div ng-include="'views/scenario/scenario-list.html'"></div>
                 </tab>
 
-                <tab ng-repeat="tab in tabs" active="tab.active" disabled="tab.disabled">
+                <tab ng-repeat="tab in appController.tabs" active="tab.active" disabled="tab.disabled">
                     <tab-heading>{{ tab.title }}
                         <i class="glyphicon glyphicon-remove-circle"
                            style="cursor: pointer; color: #428bca; padding-left: 3px;"
-                           ng-click="vm.removeTab( $index )"></i>
+                           ng-click="appController.removeTab( $index )"></i>
                     </tab-heading>
-                    <div ng-include="'views/scenario/scenario-view.html'" ng-controller="ScenarioController"
-                         ng-init="scenario=tab.scenario"></div>
+                    <div ng-include="'views/scenario/scenario-view.html'" ng-controller="ScenarioController as scenarioController"
+                         ng-init="scenarioController.scenario=tab.scenario"></div>
                     <p></p>
                 </tab>
 

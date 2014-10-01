@@ -7,6 +7,10 @@ module app {
         private scope:IScenarioScope;
         private scenarioService:ScenarioService;
 
+        scenario: Scenario;
+        isEdit: boolean;
+        scenarioReferenceData: ScenarioReferenceData;
+
         public static $inject = [
             '$scope',
             'scenarioService'
@@ -14,16 +18,16 @@ module app {
 
         constructor( private $scope:IScenarioScope, scenarioService:ScenarioService ) {
             this.scope = $scope;
-            this.scope.vm = this;
             this.scenarioService = scenarioService;
+            this.scenarioReferenceData = scenarioService.scenarioReferenceData;
         }
 
         saveScenario() {
-            this.scope.isEdit = false;
+            this.isEdit = false;
         }
 
         editScenario() {
-            this.scope.isEdit = true;
+            this.isEdit = true;
         }
 
 	}

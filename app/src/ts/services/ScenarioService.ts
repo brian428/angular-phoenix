@@ -6,6 +6,8 @@ module app {
         private httpService: ng.IHttpService;
         private promiseService: ng.IQService;
 
+        scenarioReferenceData: ScenarioReferenceData;
+
 		public static $inject = [
 			'$http',
             '$q'
@@ -83,8 +85,9 @@ module app {
 
         loadInitialData(): ng.IPromise<any> {
             var deferred: ng.IDeferred<any> = this.promiseService.defer();
-            var _this = this;
+            var me = this;
             var finalResult: InitialDataMap = new InitialDataMap();
+            me.scenarioReferenceData = new ScenarioReferenceData();
 
             this.promiseService.all([
                 this.loadProbabilities(),
@@ -94,11 +97,12 @@ module app {
                 this.loadScenarios()
             ]).then(
                 ( result: Object[] ) => {
-                    finalResult.probabilities = <Probability[]>result[ 0 ];
-                    finalResult.revenueImpacts = <RevenueImpact[]>result[ 1 ];
-                    finalResult.affectedItems = <AffectedItem[]>result[ 2 ];
-                    finalResult.effectivenessRatings = <EffectivenessRating[]>result[ 3 ];
+                    me.scenarioReferenceData.probabilities = <Probability[]>result[ 0 ];
+                    me.scenarioReferenceData.revenueImpacts = <RevenueImpact[]>result[ 1 ];
+                    me.scenarioReferenceData.affectedItems = <AffectedItem[]>result[ 2 ];
+                    me.scenarioReferenceData.effectivenessRatings = <EffectivenessRating[]>result[ 3 ];
                     finalResult.scenarios = <Scenario[]>result[ 4 ];
+                    finalResult.scenarioReferenceData = me.scenarioReferenceData;
                     deferred.resolve( finalResult );
                 }
             );
