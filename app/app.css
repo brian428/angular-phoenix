@@ -1,0 +1,99 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+.tab-content {
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+}
+
+.nav-tabs {
+    margin-bottom: 0;
+}
+
+div.tab-content {
+    padding: 25px;
+}
+
+.thumbnail.no-border {
+    border: 0;
+    box-shadow: 0;
+    -webkit-box-shadow: none;
+    border-radius: 0;
+    padding: 0;
+}
+
+.clear-btn {
+    cursor: pointer;
+    border: 1px solid #828282;
+    border-radius: 50%;
+    padding: 1px 5px 1px 5px;
+}
+
+.nav-tabs > li {
+    cursor: pointer;
+}
+
+.Terrible {
+    background-color: #C21F3D !important;
+    border: 1px solid #828282;
+}
+
+.Poor {
+    /*background-color: #FF9966 !important;*/
+    background-color: #FFA6A6 !important;
+    color: black !important;
+    border: 1px solid #828282;
+}
+
+.Marginal {
+    background-color: #FFFF1C !important;
+    color: black !important;
+    border: 1px solid #828282;
+}
+
+.Good {
+    background-color: #CCFF99 !important;
+    color: black !important;
+    border: 1px solid #828282;
+}
+
+.Great {
+    background-color: #99FF66 !important;
+    color: black !important;
+    border: 1px solid #828282;
+}
+
+.Excellent {
+    background-color: #00CC00 !important;
+    border: 1px solid #828282;
+}

@@ -1,0 +1,11 @@
+{
+	"success": "true",
+	"data": [
+		{"id":"1","value":"Very Low"},
+		{"id":"2","value":"Low"},
+		{"id":"3","value":"Moderate"},
+		{"id":"4","value":"Significant"},
+		{"id":"5","value":"High"},
+		{"id":"6","value":"Very High"}
+	]
+}

@@ -1,0 +1,11 @@
+{
+	"success": "true",
+	"data": [
+		{"id":"1","value":"Terrible"},
+		{"id":"2","value":"Poor"},
+		{"id":"3","value":"Marginal"},
+		{"id":"4","value":"Good"},
+		{"id":"5","value":"Great"},
+		{"id":"6","value":"Excellent"}
+	]
+}

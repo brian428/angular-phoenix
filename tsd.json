@@ -1,0 +1,30 @@
+{
+    "version": "v4",
+    "repo": "borisyankov/DefinitelyTyped",
+    "ref": "master",
+    "path": "app/src/ts_definitions/libs",
+    "bundle": "app/src/ts/tsd.d.ts",
+    "installed": {
+        "angular-ui-bootstrap/angular-ui-bootstrap.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "jquery/jquery.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "angularjs/angular.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "angularjs/angular-animate.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "angularjs/angular-mocks.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "angularjs/angular-route.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        },
+        "ng-grid/ng-grid.d.ts": {
+            "commit": "b2171552576bc574b97a9fd2ae5f037172049d7b"
+        }
+    }
+}

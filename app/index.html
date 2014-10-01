@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="en" ng-app="angularPhoenix" ng-strict-di class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="en" ng-app="angularPhoenix" ng-strict-di class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="en" ng-app="angularPhoenix" ng-strict-di class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="angularPhoenix" ng-strict-di class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Phoenix - AngularJS / TypeScript Example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="bower_components/select2/select2.css">
+    <link rel="stylesheet" href="bower_components/ng-grid/ng-grid.css">
+    <link rel="stylesheet" href="app.css"/>
+    <script src="bower_components/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="AppController">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+
+            <div ng-include="'views/layout/header.html'"></div>
+
+            <tabset style="border: thin">
+
+                <tab heading="Scenarios">
+                    <div ng-include="'views/scenario/scenario-list.html'"></div>
+                </tab>
+
+                <tab ng-repeat="tab in tabs" active="tab.active" disabled="tab.disabled">
+                    <tab-heading>{{ tab.title }}
+                        <i class="glyphicon glyphicon-remove-circle"
+                           style="cursor: pointer; color: #428bca; padding-left: 3px;"
+                           ng-click="vm.removeTab( $index )"></i>
+                    </tab-heading>
+                    <div ng-include="'views/scenario/scenario-view.html'" ng-controller="ScenarioController"
+                         ng-init="scenario=tab.scenario"></div>
+                    <p></p>
+                </tab>
+
+            </tabset>
+
+            <div ng-view></div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="bower_components/select2/select2.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/angular-ui-select2/src/select2.js"></script>
+<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+<script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script type="text/javascript" src="bower_components/ng-grid/ng-grid-2.0.13.debug.js"></script>
+<script type="text/javascript" src="bower_components/angular-clear-input/angular-clear-input.js"></script>
+<script type="text/javascript" src="release/js/angular-phoenix-all.js"></script>
+<script type="text/javascript" src="views/view1/view1.js"></script>
+<script type="text/javascript" src="views/view2/view2.js"></script>
+<script type="text/javascript" src="components/version/version.js"></script>
+<script type="text/javascript" src="components/version/version-directive.js"></script>
+<script type="text/javascript" src="components/version/interpolate-filter.js"></script>
+
+</body>
+</html>

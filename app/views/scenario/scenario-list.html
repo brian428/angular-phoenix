@@ -1,0 +1,36 @@
+<!-- Scenario list controls -->
+<nav class="navbar navbar-default" role="navigation">
+    <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+            <input type="text" ng-model="scenarioFilter" clear-input class="form-control" placeholder="Filter Scenarios">
+            <button type="button" class="btn btn-primary" ng-click="vm.newScenario()">New Scenario</button>
+            <button type="button" class="btn btn-primary" ng-click="vm.addTestScenario()">Add Test Scenario</button>
+        </div>
+    </form>
+</nav>
+
+<!-- Scenarios -->
+<div class="row">
+    <div class="col-sm-6 col-md-4" ng-repeat="scenario in scenarios track by $index">
+
+        <div class="thumbnail no-border">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#" ng-click="vm.scenarioDetail( scenario )">{{ scenario.name }}</a></div>
+                <div class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>Total Impact: {{ scenario.totalImpact | currency }} ({{ scenario.impactLength }} days)</li>
+                        <li>Plan Effectiveness: <span class="label {{ scenario.planEffectiveness.value }}">{{ scenario.planEffectiveness.value }}</span></li>
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li>
+                            <small>Probability: {{ scenario.probability.value }}</small>
+                        </li>
+                        <li>
+                            <small>Updated: {{ scenario.dateUpdated | date : "short" }}</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
