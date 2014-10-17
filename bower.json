@@ -15,6 +15,6 @@
     "angular-bootstrap": "^0.11.0",
     "ng-grid": "^2.0.13",
     "angular-ui-select2": "^0.0.5",
-    "angular-clear-input": "^0.0.2"
+    "angular-clear-input": "^0.1.0"
   }
 }
