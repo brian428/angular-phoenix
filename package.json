@@ -2,7 +2,7 @@
   "name": "angular-phoenix",
   "private": true,
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
+  "description": "Phoenix AngularJS Example Application",
   "repository": "https://github.com/brian428/angular-phoenix",
   "license": "MIT",
   "devDependencies": {

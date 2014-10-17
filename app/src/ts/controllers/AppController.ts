@@ -8,7 +8,7 @@ module app {
         private scenarioService:ScenarioService;
 
         scenarios: Scenario[];
-        tabs: Array<Scenario>;
+        tabs: Scenario[];
         scenarioReferenceData: ScenarioReferenceData;
 
         public static $inject = [
