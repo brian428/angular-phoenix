@@ -37,14 +37,6 @@ var tsProject = ts.createProject({
     sourceRoot: "./"
 });
 
-gulp.task( "tsd", function ( callback ) {
-    gutil.log( gutil.colors.green( "To update the tsd.json, install definitions using the command: tsd query {name} -rosa install" ) );
-    tsd({
-        command: 'reinstall',
-        config: './tsd.json'
-    }, callback);
-});
-
 gulp.task( "scripts", function() {
     var tsResult = gulp.src( tsPaths )
                        .pipe( sourcemaps.init() )
@@ -65,6 +57,14 @@ gulp.task( "watch", [ "scripts" ], function() {
     gutil.log( gutil.colors.green( "Watching for changes to TypeScript source folders: " + tsPaths ) );
     gutil.log( gutil.colors.green( "Compiling TypeScript to: " + jsAppRoot + "/release/js/" + appName + "-all.js" ) );
     gulp.watch( tsPaths, [ "scripts" ] );
+});
+
+gulp.task( "tsd", function ( callback ) {
+    gutil.log( gutil.colors.green( "To update the tsd.json, install definitions using the command: tsd query {name} -rosa install" ) );
+    tsd({
+        command: 'reinstall',
+        config: './tsd.json'
+    }, callback);
 });
 
 gulp.task( "compile", [ "scripts" ] );

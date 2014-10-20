@@ -1,4 +1,4 @@
-/// <reference path='../_all.ts' />
+/// <reference path='../tsd.d.ts' />
 /// <reference path="../controllers/AppController.ts" />
 /// <reference path="../controllers/ScenarioController.ts" />
 /// <reference path="../services/ScenarioService.ts" />

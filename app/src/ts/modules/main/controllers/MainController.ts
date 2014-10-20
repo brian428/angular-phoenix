@@ -1,4 +1,4 @@
-/// <reference path='../../../_all.ts' />
+/// <reference path='../../../tsd.d.ts' />
 /// <reference path='../interfaces/IMainScope' />
 
 module main {

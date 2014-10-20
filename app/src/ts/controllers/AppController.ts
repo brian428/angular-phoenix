@@ -60,7 +60,7 @@ module app {
         addTestScenario() {
             var refData: ScenarioReferenceData = this.scenarioReferenceData;
             var testScenario: Scenario = new Scenario();
-            testScenario.id = this.scope.scenarios.length + 1;
+            testScenario.id = this.scenarios.length + 1;
             testScenario.name = "Test Scenario " + testScenario.id;
             testScenario.description = "Test scenario " + testScenario.id + " description.";
             testScenario.dateUpdated = new Date();
